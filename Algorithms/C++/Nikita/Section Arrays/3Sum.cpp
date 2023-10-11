@@ -3,32 +3,42 @@ using namespace std;
 #include <iostream>
 #include <map>
 #include <vector>
-
+#include <set>
+#include <algorithm>
 
 
 
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        int b = 4; 
-        int c = 9;
-        int g = 9;
-        int e = 9;
-        int k[3] = {1,2,3};
-        cout << &b <<endl ;
-        cout << &c <<endl;
-        cout << &g <<endl;
-        cout << &e <<endl;
-        cout << &k <<endl; 
+        sort(nums.begin(),nums.end());
+        set<vector<int>> st ; 
+        vector<vector<int>> out ; 
+        for (int i=0 ; i<nums.size()-1;i++){
+            int left = i+1 ; 
+            int right = nums.size()-1;
+            while (left<right){
+                if (nums[i]+nums[left]+nums[right]<0){
+                    left++ ; 
+                }
+                else if (nums[i]+nums[left]+nums[right]>0){
+                    right-- ; 
+                }
+                else{
+                    st.insert({nums[i],nums[left],nums[right]});
+                    left++;
+                    right--;
+                }
+                }
+            }
         
 
-       
-
-        
-        return vector<vector<int>> {{}} ; 
+        for (auto t:st){
+            out.push_back(t);
+        }
+        return out ; 
     }
 };
-
 
 
 
